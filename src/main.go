@@ -28,6 +28,12 @@ func main() {
 	oxygenRating := ComputeOxygenGeneratorRating(day3)
 	co2Rating := ComputeCO2ScrubberRating(day3)
 	fmt.Printf("Day 3 - Part 1: %v\n", oxygenRating * co2Rating)
+
+	day4 := readStringsInFile("data/day4.txt")
+	winningScore := GetWinningBingoCardScore(day4)
+	fmt.Printf("Day 4 - Part 1: %v\n", winningScore)
+	losingScore := GetLosingBingoCardScore(day4)
+	fmt.Printf("Day 4 - Part 2: %v\n", losingScore)
 }
 
 func readIntegersInFile(filePath string) []int {
