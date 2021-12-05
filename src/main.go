@@ -34,6 +34,12 @@ func main() {
 	fmt.Printf("Day 4 - Part 1: %v\n", winningScore)
 	losingScore := GetLosingBingoCardScore(day4)
 	fmt.Printf("Day 4 - Part 2: %v\n", losingScore)
+
+	day5 := readStringsInFile("data/day5.txt")
+	dangerousZonesNumber := GetDangerousZonesNumber(day5)
+	fmt.Printf("Day 5 - Part 1: %v\n", dangerousZonesNumber)
+	dangerousZonesNumberWithDiagonals := GetDangerousZonesNumberWithDiagonals(day5)
+	fmt.Printf("Day 5 - Part 2: %v\n", dangerousZonesNumberWithDiagonals)
 }
 
 func readIntegersInFile(filePath string) []int {
