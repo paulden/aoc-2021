@@ -40,6 +40,12 @@ func main() {
 	fmt.Printf("Day 5 - Part 1: %v\n", dangerousZonesNumber)
 	dangerousZonesNumberWithDiagonals := GetDangerousZonesNumberWithDiagonals(day5)
 	fmt.Printf("Day 5 - Part 2: %v\n", dangerousZonesNumberWithDiagonals)
+
+	day6 := readStringsInFile("data/day6.txt")
+	lanterfishesNumber := CountLanternfishesNaive(day6[0], 80)
+	fmt.Printf("Day 6 - Part 1: %v\n", lanterfishesNumber)
+	lanterfishesNumber256 := CountLanternfishesOptimized(day6[0], 256)
+	fmt.Printf("Day 6 - Part 2: %v\n", lanterfishesNumber256)
 }
 
 func readIntegersInFile(filePath string) []int {
