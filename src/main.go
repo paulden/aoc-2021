@@ -46,6 +46,12 @@ func main() {
 	fmt.Printf("Day 6 - Part 1: %v\n", lanterfishesNumber)
 	lanterfishesNumber256 := CountLanternfishesOptimized(day6[0], 256)
 	fmt.Printf("Day 6 - Part 2: %v\n", lanterfishesNumber256)
+
+	day7 := readStringsInFile("data/day7.txt")
+	fuelConsumption := GetCheapestFuelConsumption(day7[0])
+	fmt.Printf("Day 7 - Part 1: %v\n", fuelConsumption)
+	fuelConsumptionUpdated := GetCheapestFuelConsumptionUpdated(day7[0])
+	fmt.Printf("Day 7 - Part 2: %v\n", fuelConsumptionUpdated)
 }
 
 func readIntegersInFile(filePath string) []int {
