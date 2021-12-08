@@ -52,6 +52,12 @@ func main() {
 	fmt.Printf("Day 7 - Part 1: %v\n", fuelConsumption)
 	fuelConsumptionUpdated := GetCheapestFuelConsumptionUpdated(day7[0])
 	fmt.Printf("Day 7 - Part 2: %v\n", fuelConsumptionUpdated)
+
+	day8 := readStringsInFile("data/day8.txt")
+	uniqueSegmentsDigits := CountUniqueSegmentsDigits(day8)
+	fmt.Printf("Day 8 - Part 1: %v\n", uniqueSegmentsDigits)
+	sum := SumOutputDisplays(day8)
+	fmt.Printf("Day 8 - Part 2: %v\n", sum)
 }
 
 func readIntegersInFile(filePath string) []int {
