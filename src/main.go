@@ -58,6 +58,12 @@ func main() {
 	fmt.Printf("Day 8 - Part 1: %v\n", uniqueSegmentsDigits)
 	sum := SumOutputDisplays(day8)
 	fmt.Printf("Day 8 - Part 2: %v\n", sum)
+
+	day9 := readStringsInFile("data/day9.txt")
+	riskLevel := GetSmokeRiskLevel(day9)
+	fmt.Printf("Day 9 - Part 1: %v\n", riskLevel)
+	biggestBasinsSize := GetBiggestBasins(day9)
+	fmt.Printf("Day 9 - Part 2: %v\n", biggestBasinsSize)
 }
 
 func readIntegersInFile(filePath string) []int {
