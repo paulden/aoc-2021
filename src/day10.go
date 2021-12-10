@@ -51,37 +51,22 @@ func ParseLineChunks(line string) ([]string, error) {
 
 	for _, char := range line {
 		delimiter := string(char)
+		var latestDelimiter string
+		if len(openingDelimiters) > 0 {
+			latestDelimiter = openingDelimiters[len(openingDelimiters)-1]
+		}
 		if delimiter == "{" || delimiter == "(" || delimiter == "[" || delimiter == "<" {
 			openingDelimiters = append(openingDelimiters, delimiter)
-		}
-
-		delimiterToBeClosed := openingDelimiters[len(openingDelimiters)-1]
-
-		switch delimiter {
-		case "}":
-			if delimiterToBeClosed != "{" {
-				return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
-			} else {
-				openingDelimiters = openingDelimiters[:len(openingDelimiters)-1]
-			}
-		case ">":
-			if delimiterToBeClosed != "<" {
-				return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
-			} else {
-				openingDelimiters = openingDelimiters[:len(openingDelimiters)-1]
-			}
-		case ")":
-			if delimiterToBeClosed != "(" {
-				return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
-			} else {
-				openingDelimiters = openingDelimiters[:len(openingDelimiters)-1]
-			}
-		case "]":
-			if delimiterToBeClosed != "[" {
-				return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
-			} else {
-				openingDelimiters = openingDelimiters[:len(openingDelimiters)-1]
-			}
+		} else if delimiter == "}" && latestDelimiter != "{" {
+			return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
+		} else if delimiter == ">" && latestDelimiter != "<" {
+			return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
+		} else if delimiter == ")" && latestDelimiter != "(" {
+			return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
+		} else if delimiter == "]" && latestDelimiter != "[" {
+			return openingDelimiters, &syntaxError{delimiter, "unexpected character"}
+		} else {
+			openingDelimiters = openingDelimiters[:len(openingDelimiters)-1]
 		}
 	}
 
@@ -96,4 +81,3 @@ type syntaxError struct {
 func (e *syntaxError) Error() string {
 	return fmt.Sprintf("%s: %s", e.invalidCharacter, e.message)
 }
-
