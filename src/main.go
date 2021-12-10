@@ -56,14 +56,20 @@ func main() {
 	day8 := readStringsInFile("data/day8.txt")
 	uniqueSegmentsDigits := CountUniqueSegmentsDigits(day8)
 	fmt.Printf("Day 8 - Part 1: %v\n", uniqueSegmentsDigits)
-	sum := SumOutputDisplays(day8)
-	fmt.Printf("Day 8 - Part 2: %v\n", sum)
+	//sum := SumOutputDisplays(day8)
+	//fmt.Printf("Day 8 - Part 2: %v\n", sum)
 
 	day9 := readStringsInFile("data/day9.txt")
 	riskLevel := GetSmokeRiskLevel(day9)
 	fmt.Printf("Day 9 - Part 1: %v\n", riskLevel)
 	biggestBasinsSize := GetBiggestBasins(day9)
 	fmt.Printf("Day 9 - Part 2: %v\n", biggestBasinsSize)
+
+	day10 := readStringsInFile("data/day10.txt")
+	syntaxScoreError := GetSyntaxErrorScore(day10)
+	fmt.Printf("Day 10 - Part 1: %v\n", syntaxScoreError)
+	autocompletionScore := GetAutocompletionScore(day10)
+	fmt.Printf("Day 10 - Part 1: %v\n", autocompletionScore)
 }
 
 func readIntegersInFile(filePath string) []int {
