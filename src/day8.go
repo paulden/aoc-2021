@@ -66,20 +66,19 @@ func isEqual(digit1, digit2 sevenSegmentDigit) bool {
 }
 
 func SumOutputDisplays(report []string) int {
-	sum := 0
-
+	var sum int
+	allPossibleMappings := GenerateAllPossibleMappings()
 	for _, pattern := range report {
-		sum += ParseSevenSegmentDisplay(pattern)
+		sum += ParseSevenSegmentDisplay(pattern, allPossibleMappings)
 	}
-
 	return sum
 }
 
-func ParseSevenSegmentDisplay(display string) int {
+func ParseSevenSegmentDisplay(display string, allPossibleMappings []map[string]string) int {
 	split := strings.Split(display, " | ")
 	fourDigits := strings.Split(split[1], " ")
 
-	mapping := GetSevenSegmentsMapping(split[0])
+	mapping := GetSevenSegmentsMapping(split[0], allPossibleMappings)
 
 	parsedDisplay := ""
 	for _, digit := range fourDigits {
@@ -140,7 +139,7 @@ func GetDigitFromMapping(value string, mapping map[string]string) string {
 	return "ERR"
 }
 
-func GetSevenSegmentsMapping(inputPattern string) map[string]string {
+func GetSevenSegmentsMapping(inputPattern string, allPossibleMappings []map[string]string) map[string]string {
 	inputDigits := strings.Split(inputPattern, " ")
 
 	var possibleZero1 sevenSegmentDigit
@@ -207,8 +206,6 @@ func GetSevenSegmentsMapping(inputPattern string) map[string]string {
 	}
 
 	possibleMappings := make([]map[string]string, 0)
-
-	allPossibleMappings := GenerateAllPossibleMappings()
 
 	for _, m := range allPossibleMappings {
 		mappedOne := newSevenSegmentDigit(m["c"] + m["f"])

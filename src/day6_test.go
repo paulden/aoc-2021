@@ -8,13 +8,14 @@ func TestDay6Example(t *testing.T) {
 	// Given
 	day6 := "3,4,3,1,2"
 	daysBeforeCheck := 80
+	expected := 5934
 
 	// When
 	lanternfishNumber := CountLanternfishesNaive(day6, daysBeforeCheck)
 
 	// Then
-	if lanternfishNumber != 5934 {
-		t.Errorf("Day 6 example: expected %v, got %v", 5934, lanternfishNumber)
+	if lanternfishNumber != expected {
+		t.Errorf("Day 6 example: expected %v, got %v", expected, lanternfishNumber)
 	}
 }
 
@@ -22,13 +23,14 @@ func TestDay6ExampleOptimized(t *testing.T) {
 	// Given
 	day6 := "3,4,3,1,2"
 	daysBeforeCheck := 80
+	expected := 5934
 
 	// When
 	lanternfishNumber := CountLanternfishesOptimized(day6, daysBeforeCheck)
 
 	// Then
-	if lanternfishNumber != 5934 {
-		t.Errorf("Day 6 example: expected %v, got %v", 5934, lanternfishNumber)
+	if lanternfishNumber != expected {
+		t.Errorf("Day 6 example: expected %v, got %v", expected, lanternfishNumber)
 	}
 }
 
@@ -36,13 +38,14 @@ func TestDay6ExamplePart2(t *testing.T) {
 	// Given
 	day6 := "3,4,3,1,2"
 	daysBeforeCheck := 256
+	expected := 26984457539
 
 	// When
 	lanternfishNumber := CountLanternfishesOptimized(day6, daysBeforeCheck)
 
 	// Then
-	if lanternfishNumber != 26984457539 {
-		t.Errorf("Day 6 example: expected %v, got %v", 5934, lanternfishNumber)
+	if lanternfishNumber != expected {
+		t.Errorf("Day 6 example: expected %v, got %v", expected, lanternfishNumber)
 	}
 }
 

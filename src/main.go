@@ -56,8 +56,8 @@ func main() {
 	day8 := readStringsInFile("data/day8.txt")
 	uniqueSegmentsDigits := CountUniqueSegmentsDigits(day8)
 	fmt.Printf("Day 8 - Part 1: %v\n", uniqueSegmentsDigits)
-	//sum := SumOutputDisplays(day8)
-	//fmt.Printf("Day 8 - Part 2: %v\n", sum)
+	sum := SumOutputDisplays(day8)
+	fmt.Printf("Day 8 - Part 2: %v\n", sum)
 
 	day9 := readStringsInFile("data/day9.txt")
 	riskLevel := GetSmokeRiskLevel(day9)

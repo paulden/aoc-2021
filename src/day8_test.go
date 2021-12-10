@@ -7,48 +7,53 @@ import (
 func TestDay8Example(t *testing.T) {
 	// Given
 	day8 := readStringsInFile("../data/day8_example.txt")
+	expected := 26
 
 	// When
 	uniqueSegmentsDigits := CountUniqueSegmentsDigits(day8)
 
 	// Then
-	if uniqueSegmentsDigits != 26 {
-		t.Errorf("Day 8 example - Part 1: expected %v, got %v", 26, uniqueSegmentsDigits)
+	if uniqueSegmentsDigits != expected {
+		t.Errorf("Day 8 example - Part 1: expected %v, got %v", expected, uniqueSegmentsDigits)
 	}
 }
 
 func TestDay8Part2ExampleSingleLine(t *testing.T) {
 	// Given
 	inputDigits := "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
+	allPossibleMappings := GenerateAllPossibleMappings()
+	expected := 5353
 
 	// When
-	result := ParseSevenSegmentDisplay(inputDigits)
+	result := ParseSevenSegmentDisplay(inputDigits, allPossibleMappings)
 
 	// Then
-	if result != 5353 {
-		t.Errorf("Day 8 example - Part 2 single line: expected %v, got %v", 26, result)
+	if result != expected {
+		t.Errorf("Day 8 example - Part 2 single line: expected %v, got %v", expected, result)
 	}
 }
 
 func TestDay8Part2Example(t *testing.T) {
 	// Given
 	day8 := readStringsInFile("../data/day8_example.txt")
+	expected := 61229
 
 	// When
 	sum := SumOutputDisplays(day8)
 
 	// Then
-	if sum != 61229 {
-		t.Errorf("Day 8 example - Part 2: expected %v, got %v", 61229, sum)
+	if sum != expected {
+		t.Errorf("Day 8 example - Part 2: expected %v, got %v", expected, sum)
 	}
 }
 
 func TestDay8Part2Mapping(t *testing.T) {
 	// Given
 	inputDigits := "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab"
+	allPossibleMappings := GenerateAllPossibleMappings()
 
 	// When
-	mapping := GetSevenSegmentsMapping(inputDigits)
+	mapping := GetSevenSegmentsMapping(inputDigits, allPossibleMappings)
 
 	// True
 	//  aaaa
