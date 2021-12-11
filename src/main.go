@@ -70,6 +70,14 @@ func main() {
 	fmt.Printf("Day 10 - Part 1: %v\n", syntaxScoreError)
 	autocompletionScore := GetAutocompletionScore(day10)
 	fmt.Printf("Day 10 - Part 1: %v\n", autocompletionScore)
+
+	day11 := readStringsInFile("data/day11.txt")
+	flashes := CountFlashes(day11)
+	fmt.Printf("Day 11 - Part 1: %v\n", flashes)
+	mindBlowingStep := FindMindBlowingStep(day11)
+	fmt.Printf("Day 11 - Part 2: %v\n", mindBlowingStep)
+
+
 }
 
 func readIntegersInFile(filePath string) []int {
