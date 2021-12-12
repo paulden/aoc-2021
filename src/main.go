@@ -77,7 +77,11 @@ func main() {
 	mindBlowingStep := FindMindBlowingStep(day11)
 	fmt.Printf("Day 11 - Part 2: %v\n", mindBlowingStep)
 
-
+	day12 := readStringsInFile("data/day12.txt")
+	paths := CountCavePathsPart1(day12)
+	fmt.Printf("Day 12 - Part 1: %v\n", paths)
+	pathsVisitingTwice := CountCavePathsPart2(day12)
+	fmt.Printf("Day 12 - Part 2: %v\n", pathsVisitingTwice)
 }
 
 func readIntegersInFile(filePath string) []int {
