@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func GetWinningBingoCardScore(file[] string) int {
+func GetWinningBingoCardScore(file []string) int {
 	sequence, bingoCards := ParseBingo(file, 5, 5)
 
 	for _, number := range sequence {
@@ -19,7 +19,7 @@ func GetWinningBingoCardScore(file[] string) int {
 	return 0
 }
 
-func GetLosingBingoCardScore(file[] string) int {
+func GetLosingBingoCardScore(file []string) int {
 	sequence, bingoCards := ParseBingo(file, 5, 5)
 	cardsNumber := len(bingoCards)
 	winningCardsNumbers := 0

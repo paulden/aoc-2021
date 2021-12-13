@@ -80,7 +80,6 @@ func PlaySingleStep(grid [][]int) ([][]int, int) {
 					flashesGrid[i][j] = 1
 					currentFlashes++
 
-
 				}
 			}
 		}

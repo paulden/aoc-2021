@@ -18,7 +18,6 @@ func TestDay12Part1StartToEnd(t *testing.T) {
 	}
 }
 
-
 func TestDay12Part1StartToAToEnd(t *testing.T) {
 	// Given
 	day12 := readStringsInFile("../data/day12_start_to_A_to_end.txt")
@@ -110,4 +109,3 @@ func TestDay12Part2ThirdExample(t *testing.T) {
 		t.Errorf("Day 12 example - Part 2 third example: expected %v, got %v", expected, paths)
 	}
 }
-

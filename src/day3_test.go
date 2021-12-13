@@ -35,7 +35,7 @@ func TestComputeEpsilon(t *testing.T) {
 	}{
 		{"10110", args{[]string{"10110"}}, 9},
 		{"01001", args{[]string{"01001"}}, 22},
-		{"01001", args{ []string{"10110", "01001", "11100"} }, 3},
+		{"01001", args{[]string{"10110", "01001", "11100"}}, 3},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

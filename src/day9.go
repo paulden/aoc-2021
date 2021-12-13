@@ -89,16 +89,16 @@ func GetBasinSet(x, y int, heightmap [][]int, basinSet map[coordinates]bool) map
 		return basinSet
 	} else {
 		if hasHigherTop {
-			basinSet = GetBasinSet(x - 1, y, heightmap, basinSet)
+			basinSet = GetBasinSet(x-1, y, heightmap, basinSet)
 		}
 		if hasHigherDown {
-			basinSet = GetBasinSet(x + 1, y, heightmap, basinSet)
+			basinSet = GetBasinSet(x+1, y, heightmap, basinSet)
 		}
 		if hasHigherLeft {
-			basinSet = GetBasinSet(x, y - 1, heightmap, basinSet)
+			basinSet = GetBasinSet(x, y-1, heightmap, basinSet)
 		}
 		if hasHigherRight {
-			basinSet = GetBasinSet(x, y + 1, heightmap, basinSet)
+			basinSet = GetBasinSet(x, y+1, heightmap, basinSet)
 		}
 		return basinSet
 	}

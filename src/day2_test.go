@@ -40,10 +40,10 @@ func Test_determinePosition(t *testing.T) {
 		want  int
 		want1 int
 	}{
-		{"Simple test case", args{ []string{"forward 5"} }, 5, 0},
-		{"Second test case", args{ []string{"forward 5", "forward 2"} }, 7, 0},
-		{"Third test case", args{ []string{"forward 5", "down 2"} }, 5, 2},
-		{"Fourth test case", args{ []string{"forward 5", "down 2", "up 1"} }, 5, 1},
+		{"Simple test case", args{[]string{"forward 5"}}, 5, 0},
+		{"Second test case", args{[]string{"forward 5", "forward 2"}}, 7, 0},
+		{"Third test case", args{[]string{"forward 5", "down 2"}}, 5, 2},
+		{"Fourth test case", args{[]string{"forward 5", "down 2", "up 1"}}, 5, 1},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -68,9 +68,9 @@ func Test_determineAimPosition(t *testing.T) {
 		want  int
 		want1 int
 	}{
-		{"Simple test case", args{ []string{"forward 5"} }, 5, 0},
-		{"Second test case", args{ []string{"forward 5", "down 2"} }, 5, 0},
-		{"Third test case", args{ []string{"forward 5", "down 5", "forward 8"} }, 13, 40},
+		{"Simple test case", args{[]string{"forward 5"}}, 5, 0},
+		{"Second test case", args{[]string{"forward 5", "down 2"}}, 5, 0},
+		{"Third test case", args{[]string{"forward 5", "down 5", "forward 8"}}, 13, 40},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

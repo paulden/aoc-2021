@@ -73,7 +73,6 @@ func TestDay8Part2Mapping(t *testing.T) {
 	//g    b
 	// cccc
 
-
 	// Then
 	if mapping["d"] != "a" || mapping["e"] != "b" || mapping["a"] != "c" || mapping["f"] != "d" || mapping["g"] != "e" || mapping["b"] != "f" || mapping["c"] != "g" {
 		t.Errorf("Day 8 mapping is invalid!")

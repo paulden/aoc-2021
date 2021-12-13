@@ -11,7 +11,7 @@ func TestParseBingo(t *testing.T) {
 	secondBingoCard := bingoCard{[][]int{{6, 7, 8}, {9, 10, 11}}, CreateEmptyScoreCard(2, 3)}
 
 	type args struct {
-		file []string
+		file       []string
 		cardHeight int
 		cardLength int
 	}

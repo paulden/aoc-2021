@@ -17,8 +17,8 @@ func CountThreeMeasurementsIncreases(data []int) int {
 	increases := 0
 	averagePreviousDepth := data[0] + data[1] + data[2]
 
-	for i, _ := range data[1:len(data) - 2] {
-		averageDepth := data[i + 1] + data[i + 2] + data[i + 3]
+	for i, _ := range data[1 : len(data)-2] {
+		averageDepth := data[i+1] + data[i+2] + data[i+3]
 		if averageDepth > averagePreviousDepth {
 			increases++
 		}
