@@ -82,6 +82,13 @@ func main() {
 	fmt.Printf("Day 12 - Part 1: %v\n", paths)
 	pathsVisitingTwice := CountCavePathsPart2(day12)
 	fmt.Printf("Day 12 - Part 2: %v\n", pathsVisitingTwice)
+
+	day13 := readStringsInFile("data/day13.txt")
+	paperFoldedOnce := FoldPaperOnce(day13)
+	fmt.Printf("Day 13 - Part 1: %v\n", len(paperFoldedOnce))
+	paperFoldedCompletely := FoldPaperCompletely(day13)
+	fmt.Printf("Day 13 - Part 2:\n")
+	PrettyPrintDots(paperFoldedCompletely)
 }
 
 func readIntegersInFile(filePath string) []int {
