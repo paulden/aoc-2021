@@ -9,7 +9,6 @@ import (
 
 func main() {
 	day1 := readIntegersInFile("data/day1.txt")
-
 	increases := CountIncreases(day1)
 	fmt.Printf("Day 1 - Part 1: %v\n", increases)
 	threeMeasurementsIncreases := CountThreeMeasurementsIncreases(day1)
@@ -19,7 +18,7 @@ func main() {
 	forwardPosition, depthPosition := determinePosition(day2)
 	fmt.Printf("Day 2 - Part 1: %v\n", forwardPosition*depthPosition)
 	forwardPositionWithAim, depthPositionWithAim := determinePositionWithAim(day2)
-	fmt.Printf("Day 2 - Part 1: %v\n", forwardPositionWithAim*depthPositionWithAim)
+	fmt.Printf("Day 2 - Part 2: %v\n", forwardPositionWithAim*depthPositionWithAim)
 
 	day3 := readStringsInFile("data/day3.txt")
 	gammaRate := ComputeGamma(day3)
@@ -27,7 +26,7 @@ func main() {
 	fmt.Printf("Day 3 - Part 1: %v\n", gammaRate*epsilonRate)
 	oxygenRating := ComputeOxygenGeneratorRating(day3)
 	co2Rating := ComputeCO2ScrubberRating(day3)
-	fmt.Printf("Day 3 - Part 1: %v\n", oxygenRating*co2Rating)
+	fmt.Printf("Day 3 - Part 2: %v\n", oxygenRating*co2Rating)
 
 	day4 := readStringsInFile("data/day4.txt")
 	winningScore := GetWinningBingoCardScore(day4)
@@ -69,7 +68,7 @@ func main() {
 	syntaxScoreError := GetSyntaxErrorScore(day10)
 	fmt.Printf("Day 10 - Part 1: %v\n", syntaxScoreError)
 	autocompletionScore := GetAutocompletionScore(day10)
-	fmt.Printf("Day 10 - Part 1: %v\n", autocompletionScore)
+	fmt.Printf("Day 10 - Part 2: %v\n", autocompletionScore)
 
 	day11 := readStringsInFile("data/day11.txt")
 	flashes := CountFlashes(day11)
@@ -89,6 +88,12 @@ func main() {
 	paperFoldedCompletely := FoldPaperCompletely(day13)
 	fmt.Printf("Day 13 - Part 2:\n")
 	PrettyPrintDots(paperFoldedCompletely)
+
+	day14 := readStringsInFile("data/day14.txt")
+	polymerCountsDifference := CountPolymerCountsDifferenceNaive(day14, 10)
+	fmt.Printf("Day 14 - Part 1: %v\n", polymerCountsDifference)
+	polymerCountsDifferenceAfter40 := CountPolymerCountsDifferenceOptimized(day14, 40)
+	fmt.Printf("Day 14 - Part 2: %v\n", polymerCountsDifferenceAfter40)
 }
 
 func readIntegersInFile(filePath string) []int {

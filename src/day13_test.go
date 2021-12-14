@@ -13,7 +13,7 @@ func TestDay13Part1Example(t *testing.T) {
 	visibleDotsAfterOneFold := FoldPaperOnce(day13)
 
 	// Then
-	if visibleDotsAfterOneFold != expected {
+	if len(visibleDotsAfterOneFold) != expected {
 		t.Errorf("Day 13 example - Part 1 example: expected %v, got %v", expected, visibleDotsAfterOneFold)
 	}
 }
