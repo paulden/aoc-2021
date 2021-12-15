@@ -94,6 +94,12 @@ func main() {
 	fmt.Printf("Day 14 - Part 1: %v\n", polymerCountsDifference)
 	polymerCountsDifferenceAfter40 := CountPolymerCountsDifferenceOptimized(day14, 40)
 	fmt.Printf("Day 14 - Part 2: %v\n", polymerCountsDifferenceAfter40)
+
+	day15 := readStringsInFile("data/day15.txt")
+	lowestTotalRiskPath := GetLowestTotalRiskPath(day15)
+	fmt.Printf("Day 15 - Part 1: %v\n", lowestTotalRiskPath)
+	lowestTotalRiskPathInRealMap := GetLowestTotalRiskPathInRealMap(day15)
+	fmt.Printf("Day 15 - Part 2: %v\n", lowestTotalRiskPathInRealMap)
 }
 
 func readIntegersInFile(filePath string) []int {
