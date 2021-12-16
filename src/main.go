@@ -100,6 +100,12 @@ func main() {
 	fmt.Printf("Day 15 - Part 1: %v\n", lowestTotalRiskPath)
 	lowestTotalRiskPathInRealMap := GetLowestTotalRiskPathInRealMap(day15)
 	fmt.Printf("Day 15 - Part 2: %v\n", lowestTotalRiskPathInRealMap)
+
+	day16 := readStringsInFile("data/day16.txt")
+	versionsSum := SumVersionNumbers(day16[0])
+	fmt.Printf("Day 16 - Part 1: %v\n", versionsSum)
+	evaluatedBITSExpression := EvaluateBITSExpression(day16[0])
+	fmt.Printf("Day 16 - Part 2: %v\n", evaluatedBITSExpression)
 }
 
 func readIntegersInFile(filePath string) []int {
