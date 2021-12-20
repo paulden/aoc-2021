@@ -58,7 +58,7 @@ func TestDay17Part1Example(t *testing.T) {
 
 	// Then
 	if result != expected {
-		t.Errorf("Day 17 - example: expected %v, got %v", expected, result)
+		t.Errorf("Day 17 Part 1 - example: expected %v, got %v", expected, result)
 	}
 }
 
@@ -71,22 +71,8 @@ func TestDay17Part2Example(t *testing.T) {
 	result := GetAllVelocities(input)
 
 	// Then
-	if result != expected {
-		t.Errorf("Day 17 Part 2- example: expected %v, got %v", expected, result)
-	}
-}
-
-func TestDay17Part2Real(t *testing.T) {
-	// Given
-	input := "target area: x=211..232, y=-124..-69"
-	expected := 2032
-
-	// When
-	result := GetAllVelocities(input)
-
-	// Then
-	if result != expected {
-		t.Errorf("Day 17 Part 2- example: expected %v, got %v", expected, result)
+	if len(result) != expected {
+		t.Errorf("Day 17 Part 2 - example: expected %v, got %v", expected, len(result))
 	}
 }
 
@@ -100,6 +86,20 @@ func TestDay17Part1Real(t *testing.T) {
 
 	// Then
 	if result != expected {
-		t.Errorf("Day 17 - example: expected %v, got %v", expected, result)
+		t.Errorf("Day 17 Part 1 - real sample: expected %v, got %v", expected, result)
+	}
+}
+
+func TestDay17Part2Real(t *testing.T) {
+	// Given
+	input := "target area: x=211..232, y=-124..-69"
+	expected := 2032
+
+	// When
+	result := GetAllVelocities(input)
+
+	// Then
+	if len(result) != expected {
+		t.Errorf("Day 17 Part 2 - real sample: expected %v, got %v", expected, len(result))
 	}
 }

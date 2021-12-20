@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -10,55 +9,26 @@ import (
 
 func GetMaxHeight(input string) int {
 	targetArea := ParseTargetArea(input)
-	vX, vY := 1, 0
 	maxHeight := 0
 
-	allVelocities := make(map[probeVelocity]bool)
+	allVelocities := GetAllVelocities(input)
 
-	for i := 0; i < 1000; i++ {
-		inArea, x, y, maxY := ComputeTrajectory(targetArea, vX, vY)
-
-		if !inArea {
-			if x < targetArea.xLeft && y < targetArea.yDown {
-				//fmt.Printf("End position is (%v, %v) - Falling too fast before reaching target!\n", x, y)
-				vX++
-			} else if x > targetArea.yTop && y > targetArea.yTop {
-				//fmt.Printf("End position is (%v, %v) - Going too far after target area, and too high!\n", x, y)
-				vX--
-			} else if x > targetArea.yTop && y < targetArea.yDown {
-				//fmt.Printf("End position is (%v, %v) - Going too far after target area, and not high enough!\n", x, y)
-				vX--
-				vY++
-			} else if x > targetArea.yTop {
-				//fmt.Printf("End position is (%v, %v) - Going too far but in the right range!\n", x, y)
-				vX--
-			} else if x >= targetArea.xLeft && x <= targetArea.xRight {
-				//fmt.Printf("End position is (%v, %v) - Falling too fast but in the right range!\n", x, y)
-			}
-		} else {
-			allVelocities[probeVelocity{vX, vY}] = true
-			if maxY > maxHeight {
-				maxHeight = maxY
-			}
-			vY++
+	for velocity, _ := range allVelocities {
+		_, _, _, maxY := ComputeTrajectory(targetArea, velocity.x, velocity.y)
+		if maxY > maxHeight {
+			maxHeight = maxY
 		}
-
-		//fmt.Printf("Adjusted initial velocity is (%v, %v)!\n", vX, vY)
 	}
-
-	fmt.Printf("All velocities : %v\n", len(allVelocities))
 
 	return maxHeight
 }
 
-func GetAllVelocities(input string) int {
+func GetAllVelocities(input string) map[probeVelocity]bool {
 	targetArea := ParseTargetArea(input)
 	allVelocities := make(map[probeVelocity]bool)
 
-	//minVX :=
-
-	for vX := 0; vX < 233; vX++ {
-		for vY := -233; vY < 233; vY++ {
+	for vX := 0; vX < targetArea.xRight + 1; vX++ {
+		for vY := -500; vY < 500; vY++ {
 			inArea, _, _, _ := ComputeTrajectory(targetArea, vX, vY)
 			if inArea {
 				allVelocities[probeVelocity{vX, vY}] = true
@@ -66,13 +36,8 @@ func GetAllVelocities(input string) int {
 		}
 	}
 
-	return len(allVelocities)
+	return allVelocities
 }
-
-//func GetVelocityXToReach(value int) int {
-//	delta := 1 * 4 * value * 2
-//
-//}
 
 func ComputeTrajectory(
 	area TargetArea,

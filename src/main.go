@@ -107,6 +107,12 @@ func main() {
 	evaluatedBITSExpression := EvaluateBITSExpression(day16[0])
 	fmt.Printf("Day 16 - Part 2: %v\n", evaluatedBITSExpression)
 
+	day17 := readStringsInFile("data/day17.txt")
+	maxHeight := GetMaxHeight(day17[0])
+	fmt.Printf("Day 17 - Part 1: %v\n", maxHeight)
+	allVelocities := GetAllVelocities(day17[0])
+	fmt.Printf("Day 17 - Part 2: %v\n", len(allVelocities))
+
 	day18 := readStringsInFile("data/day18.txt")
 	snailfishAddition, _ := SnailfishAddition(day18)
 	magnitude := snailfishAddition.ComputeMagnitude()
