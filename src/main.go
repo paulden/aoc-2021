@@ -106,6 +106,13 @@ func main() {
 	fmt.Printf("Day 16 - Part 1: %v\n", versionsSum)
 	evaluatedBITSExpression := EvaluateBITSExpression(day16[0])
 	fmt.Printf("Day 16 - Part 2: %v\n", evaluatedBITSExpression)
+
+	day18 := readStringsInFile("data/day18.txt")
+	snailfishAddition, _ := SnailfishAddition(day18)
+	magnitude := snailfishAddition.ComputeMagnitude()
+	fmt.Printf("Day 18 - Part 1: %v\n", magnitude)
+	maximumMagnitude := GetMaximumMagnitude(day18)
+	fmt.Printf("Day 18 - Part 2: %v\n", maximumMagnitude)
 }
 
 func readIntegersInFile(filePath string) []int {
