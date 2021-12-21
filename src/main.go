@@ -125,6 +125,12 @@ func main() {
 	fmt.Printf("Day 20 - Part 1: %v\n", litPixelsAfter2)
 	litPixelsAfter50 := ProcessEnhancement(day20, 50)
 	fmt.Printf("Day 20 - Part 2: %v\n", litPixelsAfter50)
+
+	day21 := readStringsInFile("data/day21.txt")
+	practiceResult := PracticeDirac(day21)
+	fmt.Printf("Day 21 - Part 1: %v\n", practiceResult)
+	diracWinnerVictories := GetDiracWinnerVictories(day21)
+	fmt.Printf("Day 21 - Part 2: %v\n", diracWinnerVictories)
 }
 
 func readIntegersInFile(filePath string) []int {
