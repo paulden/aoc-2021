@@ -119,6 +119,12 @@ func main() {
 	fmt.Printf("Day 18 - Part 1: %v\n", magnitude)
 	maximumMagnitude := GetMaximumMagnitude(day18)
 	fmt.Printf("Day 18 - Part 2: %v\n", maximumMagnitude)
+
+	day20 := readStringsInFile("data/day20.txt")
+	litPixelsAfter2 := ProcessEnhancement(day20, 2)
+	fmt.Printf("Day 20 - Part 1: %v\n", litPixelsAfter2)
+	litPixelsAfter50 := ProcessEnhancement(day20, 50)
+	fmt.Printf("Day 20 - Part 2: %v\n", litPixelsAfter50)
 }
 
 func readIntegersInFile(filePath string) []int {
