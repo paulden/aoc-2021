@@ -131,6 +131,12 @@ func main() {
 	fmt.Printf("Day 21 - Part 1: %v\n", practiceResult)
 	diracWinnerVictories := GetDiracWinnerVictories(day21)
 	fmt.Printf("Day 21 - Part 2: %v\n", diracWinnerVictories)
+
+	day22 := readStringsInFile("data/day22.txt")
+	cubesOnInitialization := CountCubesOnNaive(day22)
+	fmt.Printf("Day 22 - Part 1: %v\n", cubesOnInitialization)
+	cubesOnEverywhere := CountCubesOnOptimized(day22)
+	fmt.Printf("Day 22 - Part 2: %v\n", cubesOnEverywhere)
 }
 
 func readIntegersInFile(filePath string) []int {
