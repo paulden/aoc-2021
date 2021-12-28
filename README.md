@@ -9,4 +9,4 @@ All fifty stars acquired!
 - Implement Github Action to build, test and get badges
 - Refactor day 23 because it is the worst thing I have ever done and it takes forever to run
 - Actually day 24 is worse so also refactor this one
-- Small refactor to day 25
+- Day 25 should be optimized

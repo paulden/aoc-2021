@@ -23,6 +23,7 @@ import (
 	"aoc-2021/internal/day20"
 	"aoc-2021/internal/day21"
 	"aoc-2021/internal/day22"
+	"aoc-2021/internal/day25"
 	"aoc-2021/internal/pkg/utils"
 	"fmt"
 )
@@ -182,4 +183,9 @@ func main() {
 	fmt.Println("--- Day 22: Reactor Reboot ---")
 	fmt.Printf("Part 1: %v\n", day22Part1)
 	fmt.Printf("Part 2: %v\n", day22Part2)
+
+	input25 := utils.ReadStringsInFile("assets/day25.txt")
+	day25Part1 := day25.CountStepsBeforeImmobilisation(input25)
+	fmt.Println("--- Day 25: Sea Cucumber ---")
+	fmt.Printf("Part 1: %v\n", day25Part1)
 }
