@@ -23,6 +23,7 @@ import (
 	"aoc-2021/internal/day20"
 	"aoc-2021/internal/day21"
 	"aoc-2021/internal/day22"
+	"aoc-2021/internal/day23"
 	"aoc-2021/internal/day25"
 	"aoc-2021/internal/pkg/utils"
 	"fmt"
@@ -183,6 +184,13 @@ func main() {
 	fmt.Println("--- Day 22: Reactor Reboot ---")
 	fmt.Printf("Part 1: %v\n", day22Part1)
 	fmt.Printf("Part 2: %v\n", day22Part2)
+
+	input23 := utils.ReadStringsInFile("assets/day23.txt")
+	day23Part1 := day23.GetMinimalEnergyCostToOrder(input23)
+	day23Part2 := day23.GetMinimalEnergyCostToOrderPart2(input23)
+	fmt.Println("--- Day 23: Amphipod ---")
+	fmt.Printf("Part 1: %v\n", day23Part1)
+	fmt.Printf("Part 2: %v\n", day23Part2)
 
 	input25 := utils.ReadStringsInFile("assets/day25.txt")
 	day25Part1 := day25.CountStepsBeforeImmobilisation(input25)

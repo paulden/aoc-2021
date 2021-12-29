@@ -6,15 +6,15 @@ import (
 	"math"
 )
 
-func GetMinimalEnergyCostToOrder(input []string) int {
-	burrow := parseBurrow(input)
+func GetMinimalEnergyCostToOrderPart2(input []string) int {
+	burrow := parseUnfoldedBurrow(input)
 	minimumEnergyCost := math.MaxInt
 
-	movementsTotalCost := map[foldedBurrow]int{burrow: 0}
-	nextMovements := map[foldedBurrow]int{burrow: 0}
+	movementsTotalCost := map[unfoldedBurrow]int{burrow: 0}
+	nextMovements := map[unfoldedBurrow]int{burrow: 0}
 
 	for len(nextMovements) > 0 {
-		currentBurrow := getNextMovement(nextMovements)
+		currentBurrow := getNextMovementPart2(nextMovements)
 
 		delete(nextMovements, currentBurrow)
 
@@ -35,9 +35,9 @@ func GetMinimalEnergyCostToOrder(input []string) int {
 	return minimumEnergyCost
 }
 
-func getNextMovement(possibleMovements map[foldedBurrow]int) foldedBurrow {
+func getNextMovementPart2(possibleMovements map[unfoldedBurrow]int) unfoldedBurrow {
 	min := math.MaxInt
-	var nextBurrow foldedBurrow
+	var nextBurrow unfoldedBurrow
 	for burrow, cost := range possibleMovements {
 		if cost < min {
 			min = cost
@@ -47,8 +47,8 @@ func getNextMovement(possibleMovements map[foldedBurrow]int) foldedBurrow {
 	return nextBurrow
 }
 
-func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
-	nextBurrows := make(map[foldedBurrow]int)
+func (b *unfoldedBurrow) getNextBurrowsWithCost() map[unfoldedBurrow]int {
+	nextBurrows := make(map[unfoldedBurrow]int)
 	hallwayPossibleLocations := []int{0, 1, 3, 5, 7, 9, 10}
 	sideRoomIndices := map[string]int{
 		"A": 2,
@@ -65,7 +65,7 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 
 	for i, spot := range b.hallway {
 		if spot == "A" && b.canVisit(i, sideRoomIndices[spot]) && (b.hasEmptySideRoomA() || b.hasHalfCompleteSideRoomA()) {
-			_, depth := getTopSpot(b.sideRoomA)
+			_, depth := getTopSpotUnfolded(b.sideRoomA)
 			newBurrow := b.copy()
 			newBurrow.hallway[i] = ""
 			newBurrow.sideRoomA[depth-1] = spot
@@ -73,7 +73,7 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 			nextBurrows[newBurrow] = cost
 		}
 		if spot == "B" && b.canVisit(i, sideRoomIndices[spot]) && (b.hasEmptySideRoomB() || b.hasHalfCompleteSideRoomB()) {
-			_, depth := getTopSpot(b.sideRoomB)
+			_, depth := getTopSpotUnfolded(b.sideRoomB)
 			newBurrow := b.copy()
 			newBurrow.hallway[i] = ""
 			newBurrow.sideRoomB[depth-1] = spot
@@ -81,7 +81,7 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 			nextBurrows[newBurrow] = cost
 		}
 		if spot == "C" && b.canVisit(i, sideRoomIndices[spot]) && (b.hasEmptySideRoomC() || b.hasHalfCompleteSideRoomC()) {
-			_, depth := getTopSpot(b.sideRoomC)
+			_, depth := getTopSpotUnfolded(b.sideRoomC)
 			newBurrow := b.copy()
 			newBurrow.hallway[i] = ""
 			newBurrow.sideRoomC[depth-1] = spot
@@ -89,7 +89,7 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 			nextBurrows[newBurrow] = cost
 		}
 		if spot == "D" && b.canVisit(i, sideRoomIndices[spot]) && (b.hasEmptySideRoomD() || b.hasHalfCompleteSideRoomD()) {
-			_, depth := getTopSpot(b.sideRoomD)
+			_, depth := getTopSpotUnfolded(b.sideRoomD)
 			newBurrow := b.copy()
 			newBurrow.hallway[i] = ""
 			newBurrow.sideRoomD[depth-1] = spot
@@ -98,10 +98,10 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 		}
 	}
 
-	topA, depthA := getTopSpot(b.sideRoomA)
-	topB, depthB := getTopSpot(b.sideRoomB)
-	topC, depthC := getTopSpot(b.sideRoomC)
-	topD, depthD := getTopSpot(b.sideRoomD)
+	topA, depthA := getTopSpotUnfolded(b.sideRoomA)
+	topB, depthB := getTopSpotUnfolded(b.sideRoomB)
+	topC, depthC := getTopSpotUnfolded(b.sideRoomC)
+	topD, depthD := getTopSpotUnfolded(b.sideRoomD)
 
 	if topA != "" && (topA != "A" || !b.hasHalfCompleteSideRoomA()) {
 		for _, i := range hallwayPossibleLocations {
@@ -154,64 +154,100 @@ func (b *foldedBurrow) getNextBurrowsWithCost() map[foldedBurrow]int {
 	return nextBurrows
 }
 
-type foldedBurrow struct {
+type unfoldedBurrow struct {
 	hallway                                    [11]string
-	sideRoomA, sideRoomB, sideRoomC, sideRoomD [2]string
+	sideRoomA, sideRoomB, sideRoomC, sideRoomD [4]string
 }
 
-func (b *foldedBurrow) isOrdered() bool {
+func (b *unfoldedBurrow) isOrdered() bool {
 	return b.hasCompleteSideRoomA() && b.hasCompleteSideRoomB() && b.hasCompleteSideRoomC() && b.hasCompleteSideRoomD()
 }
 
-func (b *foldedBurrow) hasCompleteSideRoomA() bool {
-	return isSideRoomFilledWith(b.sideRoomA, "A")
+func (b *unfoldedBurrow) hasCompleteSideRoomA() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomA, "A")
 }
 
-func (b *foldedBurrow) hasCompleteSideRoomB() bool {
-	return isSideRoomFilledWith(b.sideRoomB, "B")
+func (b *unfoldedBurrow) hasCompleteSideRoomB() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomB, "B")
 }
 
-func (b *foldedBurrow) hasCompleteSideRoomC() bool {
-	return isSideRoomFilledWith(b.sideRoomC, "C")
+func (b *unfoldedBurrow) hasCompleteSideRoomC() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomC, "C")
 }
 
-func (b *foldedBurrow) hasCompleteSideRoomD() bool {
-	return isSideRoomFilledWith(b.sideRoomD, "D")
+func (b *unfoldedBurrow) hasCompleteSideRoomD() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomD, "D")
 }
 
-func (b *foldedBurrow) hasHalfCompleteSideRoomA() bool {
-	return b.sideRoomA[0] == "" && b.sideRoomA[1] == "A"
+func (b *unfoldedBurrow) hasHalfCompleteSideRoomA() bool {
+	_, depth := getTopSpotUnfolded(b.sideRoomA)
+	if depth == 0 {
+		return false
+	}
+	for i := depth; i < len(b.sideRoomA); i++ {
+		if b.sideRoomA[i] != "A" {
+			return false
+		}
+	}
+	return true
 }
 
-func (b *foldedBurrow) hasHalfCompleteSideRoomB() bool {
-	return b.sideRoomB[0] == "" && b.sideRoomB[1] == "B"
+func (b *unfoldedBurrow) hasHalfCompleteSideRoomB() bool {
+	_, depth := getTopSpotUnfolded(b.sideRoomB)
+	if depth == 0 {
+		return false
+	}
+	for i := depth; i < len(b.sideRoomB); i++ {
+		if b.sideRoomB[i] != "B" {
+			return false
+		}
+	}
+	return true
 }
 
-func (b *foldedBurrow) hasHalfCompleteSideRoomC() bool {
-	return b.sideRoomC[0] == "" && b.sideRoomC[1] == "C"
+func (b *unfoldedBurrow) hasHalfCompleteSideRoomC() bool {
+	_, depth := getTopSpotUnfolded(b.sideRoomC)
+	if depth == 0 {
+		return false
+	}
+	for i := depth; i < len(b.sideRoomC); i++ {
+		if b.sideRoomC[i] != "C" {
+			return false
+		}
+	}
+	return true
 }
 
-func (b *foldedBurrow) hasHalfCompleteSideRoomD() bool {
-	return b.sideRoomD[0] == "" && b.sideRoomD[1] == "D"
+func (b *unfoldedBurrow) hasHalfCompleteSideRoomD() bool {
+	_, depth := getTopSpotUnfolded(b.sideRoomD)
+	if depth == 0 {
+		return false
+	}
+	for i := depth; i < len(b.sideRoomD); i++ {
+		if b.sideRoomD[i] != "D" {
+			return false
+		}
+	}
+	return true
 }
 
-func (b *foldedBurrow) hasEmptySideRoomA() bool {
-	return isSideRoomFilledWith(b.sideRoomA, "")
+func (b *unfoldedBurrow) hasEmptySideRoomA() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomA, "")
 }
 
-func (b *foldedBurrow) hasEmptySideRoomB() bool {
-	return isSideRoomFilledWith(b.sideRoomB, "")
+func (b *unfoldedBurrow) hasEmptySideRoomB() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomB, "")
 }
 
-func (b *foldedBurrow) hasEmptySideRoomC() bool {
-	return isSideRoomFilledWith(b.sideRoomC, "")
+func (b *unfoldedBurrow) hasEmptySideRoomC() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomC, "")
 }
 
-func (b *foldedBurrow) hasEmptySideRoomD() bool {
-	return isSideRoomFilledWith(b.sideRoomD, "")
+func (b *unfoldedBurrow) hasEmptySideRoomD() bool {
+	return isUnfoldedSideRoomFilledWith(b.sideRoomD, "")
 }
 
-func (b *foldedBurrow) canVisit(source, destination int) bool {
+func (b *unfoldedBurrow) canVisit(source, destination int) bool {
 	if destination > source {
 		for i := source + 1; i <= destination; i++ {
 			if b.hallway[i] != "" {
@@ -228,11 +264,11 @@ func (b *foldedBurrow) canVisit(source, destination int) bool {
 	return true
 }
 
-func (b *foldedBurrow) copy() foldedBurrow {
-	return foldedBurrow{b.hallway, b.sideRoomA, b.sideRoomB, b.sideRoomC, b.sideRoomD}
+func (b *unfoldedBurrow) copy() unfoldedBurrow {
+	return unfoldedBurrow{b.hallway, b.sideRoomA, b.sideRoomB, b.sideRoomC, b.sideRoomD}
 }
 
-func isSideRoomFilledWith(column [2]string, expected string) bool {
+func isUnfoldedSideRoomFilledWith(column [4]string, expected string) bool {
 	for _, spot := range column {
 		if spot != expected {
 			return false
@@ -241,7 +277,7 @@ func isSideRoomFilledWith(column [2]string, expected string) bool {
 	return true
 }
 
-func getTopSpot(column [2]string) (string, int) {
+func getTopSpotUnfolded(column [4]string) (string, int) {
 	for depth, spot := range column {
 		if spot != "" {
 			return spot, depth
@@ -250,41 +286,42 @@ func getTopSpot(column [2]string) (string, int) {
 	return "", len(column)
 }
 
-func parseBurrow(input []string) foldedBurrow {
+func parseUnfoldedBurrow(input []string) unfoldedBurrow {
 	hallway := parseHallway(input)
-	sideRoomA := parseSideRoom(input, 3)
-	sideRoomB := parseSideRoom(input, 5)
-	sideRoomC := parseSideRoom(input, 7)
-	sideRoomD := parseSideRoom(input, 9)
+	sideRoomA := parseUnfoldedSideRoom(input, 3)
+	sideRoomB := parseUnfoldedSideRoom(input, 5)
+	sideRoomC := parseUnfoldedSideRoom(input, 7)
+	sideRoomD := parseUnfoldedSideRoom(input, 9)
 
-	return foldedBurrow{hallway, sideRoomA, sideRoomB, sideRoomC, sideRoomD}
+	return unfoldedBurrow{hallway, sideRoomA, sideRoomB, sideRoomC, sideRoomD}
 }
 
-func parseHallway(input []string) (hallway [11]string) {
-	for i := 0; i < len(hallway); i++ {
-		char := string(input[1][i+1])
-		if string(char) == "." {
-			hallway[i] = ""
-		} else {
-			hallway[i] = char
-		}
+func parseUnfoldedSideRoom(input []string, sideRoomIndex int) (sideRoom [4]string) {
+	topChar := string(input[2][sideRoomIndex])
+	bottomChar := string(input[3][sideRoomIndex])
+	if string(topChar) == "." {
+		sideRoom[0] = ""
+	} else {
+		sideRoom[0] = topChar
 	}
-	return hallway
-}
-
-func parseSideRoom(input []string, sideRoomIndex int) (sideRoom [2]string) {
-	for i := 0; i < len(sideRoom); i++ {
-		char := string(input[i+2][sideRoomIndex])
-		if string(char) == "." {
-			sideRoom[i] = ""
-		} else {
-			sideRoom[i] = char
-		}
+	if sideRoomIndex == 3 {
+		sideRoom[1], sideRoom[2] = "D", "D"
+	} else if sideRoomIndex == 5 {
+		sideRoom[1], sideRoom[2] = "C", "B"
+	}else if sideRoomIndex == 7 {
+		sideRoom[1], sideRoom[2] = "B", "A"
+	} else if sideRoomIndex == 9 {
+		sideRoom[1], sideRoom[2] = "A", "C"
+	}
+	if string(bottomChar) == "." {
+		sideRoom[3] = ""
+	} else {
+		sideRoom[3] = bottomChar
 	}
 	return sideRoom
 }
 
-func (b *foldedBurrow) prettyPrint() {
+func (b *unfoldedBurrow) prettyPrint() {
 	fmt.Println("#############")
 
 	fmt.Printf("#")
@@ -308,9 +345,3 @@ func (b *foldedBurrow) prettyPrint() {
 	fmt.Println("  #########  ")
 }
 
-func getAmphipodForPrinting(amphipod string) string {
-	if amphipod == "" {
-		return "."
-	}
-	return amphipod
-}
