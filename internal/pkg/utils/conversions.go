@@ -49,3 +49,11 @@ func StringsToIntegers(strings []string) []int {
 	}
 	return integers
 }
+
+func SliceToInteger(slice []int) (result int) {
+	for i, integer := range slice {
+		result += integer * Power(10, len(slice)-i-1)
+	}
+
+	return result
+}

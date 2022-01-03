@@ -7,6 +7,7 @@ All fifty stars acquired!
 ## TODO
 
 - Implement Github Action to build, test and get badges
-- Refactor day 23 because it is the worst thing I have ever done and it takes forever to run
-- Actually day 24 is worse so also refactor this one
-- Day 25 should be optimized
+- Day 23: Use A* instead of Dijkstra, or something more appropriate (it takes a very long time)/
+- Day 24: I could get how the "pop" operations occurred and reduce the number of operations to make but I should really
+dive into the "push" operations to work out how the program behaves.
+- Day 25: could be optimized.

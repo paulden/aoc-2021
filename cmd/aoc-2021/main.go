@@ -24,6 +24,7 @@ import (
 	"aoc-2021/internal/day21"
 	"aoc-2021/internal/day22"
 	"aoc-2021/internal/day23"
+	"aoc-2021/internal/day24"
 	"aoc-2021/internal/day25"
 	"aoc-2021/internal/pkg/utils"
 	"fmt"
@@ -191,6 +192,13 @@ func main() {
 	fmt.Println("--- Day 23: Amphipod ---")
 	fmt.Printf("Part 1: %v\n", day23Part1)
 	fmt.Printf("Part 2: %v\n", day23Part2)
+
+	input24 := utils.ReadStringsInFile("assets/day24.txt")
+	day24Part1 := day24.FindLargestModelNumber(input24)
+	day24Part2 := day24.FindSmallestModelNumber(input24)
+	fmt.Println("--- Day 24: Arithmetic Logic Unit ---")
+	fmt.Printf("Part 1: %v\n", day24Part1)
+	fmt.Printf("Part 2: %v\n", day24Part2)
 
 	input25 := utils.ReadStringsInFile("assets/day25.txt")
 	day25Part1 := day25.CountStepsBeforeImmobilisation(input25)

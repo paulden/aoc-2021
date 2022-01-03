@@ -2,157 +2,65 @@ package day24
 
 import (
 	"aoc-2021/internal/pkg/utils"
-	"fmt"
-	"strconv"
 	"testing"
-	"time"
 )
 
-func TestDay23ParseALUInstructions(t *testing.T) {
+func TestDay24RunALUSequenceDecimalToBits1(t *testing.T) {
 	// Given
-	input := utils.ReadStringsInFile("../data/day24_example1.txt")
-	expectedInstruction0 := ALUInstruction{"inp", "z", ""}
-	expectedInstruction1 := ALUInstruction{"inp", "x", ""}
-	expectedInstruction2 := ALUInstruction{"mul", "z", "3"}
-	expectedInstruction3 := ALUInstruction{"eql", "z", "x"}
+	program := utils.ReadStringsInFile("testdata/example1.txt")
+	initialRegistry := registry{0, 0, 0, 0}
+	expectedRegistry := registry{0, 1, 1, 1}
+	input := 7
 
 	// When
-	instructions := ParseALUInstructions(input)
+	r := runALUSequence(program, input, &initialRegistry)
 
 	// Then
-	if instructions[0] != expectedInstruction0 {
-		t.Errorf("Day 24 - Parsing instructions: expected %v, got %v", expectedInstruction0, instructions[0])
-	}
-	if instructions[1] != expectedInstruction1 {
-		t.Errorf("Day 24 - Parsing instructions: expected %v, got %v", expectedInstruction1, instructions[1])
-	}
-	if instructions[2] != expectedInstruction2 {
-		t.Errorf("Day 24 - Parsing instructions: expected %v, got %v", expectedInstruction2, instructions[2])
-	}
-	if instructions[3] != expectedInstruction3 {
-		t.Errorf("Day 24 - Parsing instructions: expected %v, got %v", expectedInstruction3, instructions[3])
+	if *r != expectedRegistry {
+		t.Errorf("Day 24 - Error converting decimal input to bits, expected %v, got %v", expectedRegistry, *r)
 	}
 }
 
-//func TestDay23RunALUProgram1(t *testing.T) {
-//	// Given
-//	inputProgram := utils.ReadStringsInFile("../data/day24_example1.txt")
-//	inputSequence1 := []int{2, 4}
-//	inputSequence2 := []int{2, 6}
-//
-//	// When
-//	_, x1, _, z1 := RunALUProgram(inputProgram, inputSequence1)
-//	_, x2, _, z2 := RunALUProgram(inputProgram, inputSequence2)
-//
-//	if x1 != 4 {
-//		t.Errorf("Day 24 - example1: expected x1 to be %v, got %v", 4, x1)
-//	}
-//	if z1 != 0 {
-//		t.Errorf("Day 24 - example1: expected z1 to be %v, got %v", 0, z1)
-//	}
-//	if x2 != 6 {
-//		t.Errorf("Day 24 - example1: expected x2 to be %v, got %v", 4, x2)
-//	}
-//	if z2 != 1 {
-//		t.Errorf("Day 24 - example1: expected z2 to be %v, got %v", 0, z2)
-//	}
-//}
-
-//func TestDay23RunALUProgram2(t *testing.T) {
-//	// Given
-//	inputProgram := utils.ReadStringsInFile("../data/day24_example2.txt")
-//	inputSequence1 := []int{7}
-//	inputSequence2 := []int{11}
-//
-//	// When
-//	w1, x1, y1, z1 := RunALUProgram(inputProgram, inputSequence1)
-//	w2, x2, y2, z2 := RunALUProgram(inputProgram, inputSequence2)
-//
-//	if w1 != 0 && x1 != 1 && y1 != 1 && z1 != 1 {
-//		t.Errorf("Day 24 - example2: error converting first decimal input to bits")
-//	}
-//	if w2 != 1 && x2 != 0 && y2 != 1 && z2 != 0 {
-//		t.Errorf("Day 24 - example2: error converting second decimal input to bits")
-//	}
-//}
-
-//func TestDay23RunALUProgramReal(t *testing.T) {
-//	// Given
-//	inputProgram := utils.ReadStringsInFile("../data/day24.txt")
-//	inputSequence := []int{1, 3, 5, 7, 9, 2, 4, 6, 8, 9, 9, 9, 9, 9}
-//
-//	//TryStuff(inputProgram)
-//	//fmt.Println(numbers[0])
-//
-//	// When
-//	now := time.Now()
-//	w, x, y, z := RunALUProgram(inputProgram, inputSequence)
-//	fmt.Printf("Elapsed time: %v\n", time.Since(now))
-//
-//	fmt.Printf("w: %v, x: %v, y: %v, z: %v\n", w, x, y, z)
-//}
-
-func TestDay23RunALUPart14(t *testing.T) {
+func TestDay24RunALUSequenceDecimalToBits2(t *testing.T) {
 	// Given
-	inputProgram := utils.ReadStringsInFile("../data/day24.txt")
-	//inputSequence := []int{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-
-	// Just try every combination of this "div z 1" (so 9^7) since "div z 26" should be fixed to "z(i-1) + (add x <value>) % 26" if possible
-	// I'll clean it out after Christmas!
-	for i := 1; i < 10; i++ {
-		for j := 1; j < 10; j++ {
-			fmt.Printf("%v%v\n", i, j)
-			for k := 1; k < 10; k++ {
-				for l := 1; l < 10; l++ {
-					for m := 1; m < 10; m++ {
-						for n := 1; n < 10; n++ {
-							for o := 1; o < 10; o++ {
-								FindStuff(inputProgram, []int{i, j, k, l, m, n, o})
-								//_, _, _, z := RunALUProgram(inputProgram, []int{i, j, k, l})
-								//fmt.Printf("z: %v\n", z)
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	program := utils.ReadStringsInFile("testdata/example1.txt")
+	initialRegistry := registry{0, 0, 0, 0}
+	expectedRegistry := registry{1, 0, 1, 1}
+	input := 11
 
 	// When
-	now := time.Now()
-	//w, x, y, z := RunALUProgram(inputProgram, inputSequence)
-	fmt.Printf("Elapsed time: %v\n", time.Since(now))
+	r := runALUSequence(program, input, &initialRegistry)
 
-	//fmt.Printf("w: %v, x: %v, y: %v, z: %v\n", w, x, y, z)
+	// Then
+	if *r != expectedRegistry {
+		t.Errorf("Day 24 - Error converting decimal input to bits, expected %v, got %v", expectedRegistry, *r)
+	}
 }
 
-func FindStuff(program []string, sequence []int) bool {
-	s := make([]int, 0)
-	w, x, y, z := 0, 0, 0, 0
-	currentInputOne := 0
+func TestDay24Part1(t *testing.T) {
+	// Given
+	program := utils.ReadStringsInFile("testdata/day24.txt")
+	expectedNumber := 92915979999498
 
-	for i := 1; i <= 14; i++ {
-		path := "../data/day24_" + strconv.Itoa(i) + ".txt"
-		inputProgram := utils.ReadStringsInFile(path)
-		instructions := ParseALUInstructions(inputProgram)
-		if instructions[4].b == "1" {
-			s = append(s, sequence[currentInputOne])
-			w, x, y, z = RunALUProgram(instructions, []int{sequence[currentInputOne]}, w, x, y, z)
-			currentInputOne++
-		}  else {
-			t, _ := strconv.ParseInt(instructions[5].b, 10, 64)
-			inputToPass := (z + int(t)) % 26
-			if inputToPass > 9 || inputToPass < 1 {
-				return false
-			}
-			s = append(s, inputToPass)
-			w, x, y, z = RunALUProgram(instructions, []int{inputToPass}, w, x, y, z)
-		}
-	}
+	// When
+	smallestModelNumber := FindLargestModelNumber(program)
 
-	if z == 0 {
-		fmt.Println(s)
-		return true
+	// Then
+	if smallestModelNumber != expectedNumber {
+		t.Errorf("Day 24 - Expected %v, got %v", expectedNumber, smallestModelNumber)
 	}
-	return false
+}
+
+func TestDay24Part2(t *testing.T) {
+	// Given
+	program := utils.ReadStringsInFile("testdata/day24.txt")
+	expectedNumber := 21611513911181
+
+	// When
+	smallestModelNumber := FindSmallestModelNumber(program)
+
+	// Then
+	if smallestModelNumber != expectedNumber {
+		t.Errorf("Day 24 - Expected %v, got %v", expectedNumber, smallestModelNumber)
+	}
 }
